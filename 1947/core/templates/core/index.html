@@ -1,0 +1,48 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+    <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+        <h2 class="mb-12 text-2xl text-center">Newest Items</h2>
+        {% comment %} <div class="grid grid-cols-3 gap-4"> {% endcomment %}
+        
+        <div class="bg-gray-200">
+            <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+                <div class="grid grid-cols-3 gap-5 rounded-2xl">
+                    {% for item in items %}
+                        <a href="{% url 'item:detail' item.id %}" class="group" >
+                            <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-xl bg-gray-400" style="height: 400px;">
+                                <img src="{{ item.image.url }}" alt="{{ item.name }}" class="h-full w-full object-cover object-center group-hover:opacity-75">
+                            </div>
+                            <h3 class="mt-4 text-sm text-gray-700">{{ item.name }}</h3>
+                            <p class="mt-1 text-lg font-medium text-gray-900">{{ item.price }}</p>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+</div> 
+
+    <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+        <h2 class="mb-12 text-2xl text-center">Categories</h2>
+
+        <div class="grid grid-cols-3 gap-3">
+            {% for category in categories %}
+                <div>
+                    <a href="#">
+                        <div class="p-6 bg-white rounded-b-xl">
+                            <h2 class="text-2xl">{{ category.name }}</h2>
+                            <p class="text-gray-500">{{ category.items.count }} items</p>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script>
+        let message = "You can access all the functions only if you are authenticated.\nSo we recommend you to log in to the website.";
+        window.alert(message);
+    </script>
+{% endblock %}
