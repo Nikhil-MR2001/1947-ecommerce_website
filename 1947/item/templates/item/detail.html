@@ -3,16 +3,16 @@
 {% block title %}{{ item.name }}{% endblock %}
 
 {% block content %}
-<div class="grid grid-cols-5 gap-6">
+
+<div class="grid grid-cols-6 gap-6 product">
     <div class="col-span-3">
         <img src="{{ item.image.url }}" class="rounded-xl">
     </div>
 
-    <div class="col-span-2 p-6 bg-gray-100 rounded-xl">
+    <div class="col-span-3 p-6 bg-gray-100 rounded-xl">
         <h1 class="mb-6 text-3xl">{{ item.name }}</h1>
         <p class="text-gray-500"><strong>Price: </strong>{{ item.price }}</p>
         <p class="text-gray-500"><strong>Seller: </strong>{{ item.created_by.username }}</p>
-    
         {% if item.description %}
             <p class="text-gray-700">
                 <strong class="text-gray-500">Description:</strong><br>
@@ -20,37 +20,116 @@
             </p>
         {% endif %}
 
-        {% if request.user == item.created_by %}
-            <div class="mt-6 p-6 bg-white rounded-xl">
-                <p>This is your item!</p>
-
-                <a href="{% url 'item:edit' item.id %}" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl">Edit</a>
-                <a href="{% url 'item:delete' item.id %}" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-red-500 text-white rounded-xl">Delete</a>
-            </div>
-        {% else %}  
-            <a href="{% url 'conversation:new' item.id %}" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Contact seller</a>
-        {% endif %}
     </div>
 </div>
 
 <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
     <h2 class="mb-12 text-2xl text-center">Related items</h2>
 
-    <div class="grid grid-cols-3 gap-3">
+<div class='container-fluid'>
+    <div class="row n">
         {% for item in related_items %}
-            <div>
-                <a href="{% url 'item:detail' item.id %}">
-                    <div>
-                        <img src="{{ item.image.url }}" class="rounded-t-xl">
-                    </div>
-
-                    <div class="p-6 bg-white rounded-b-xl">
-                        <h2 class="text-2xl">{{ item.name }}</h2>
-                        <p class="text-gray-500">Price: {{ item.price }}</p>
-                    </div>
-                </a>
-            </div>
+           <div class="card">
+    <img src="{{ item.image.url }}" alt="{{ item.name }}" />
+    <div class="card-body">
+        <h5 class="card-title">{{ item.name }}</h5>
+        <p class="card-text">{{ item.price }}</p>
+    </div>
+               <button class="button-6"><a href="{% url 'item:detail' item.id %}">Read More</a></button>
+</div>
         {% endfor %}
     </div>
 </div>
+
+<style>
+
+
+.n {
+display:flex;
+}
+
+/* CSS */
+.button-6 {
+  align-items: center;
+  background-color: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: .25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  margin-bottom:10px;
+  min-height: 3rem;
+  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: auto;
+}
+
+.button-6:hover,
+.button-6:focus {
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.button-6:hover {
+  transform: translateY(-1px);
+}
+
+.button-6:active {
+  background-color: #F0F0F1;
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+  color: rgba(0, 0, 0, 0.65);
+  transform: translateY(0);
+}
+
+
+.card {
+    width: 100%;
+    max-width: 330px; /* Adjust the maximum width as needed */
+    margin: 0 auto; /* Center the card horizontally */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.card img {
+    width: 90%;
+    height: 300px;
+    border: none;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #555;
+}
+
+</style>
+
+
 {% endblock %}

@@ -31,7 +31,7 @@
         <div class="grid grid-cols-3 gap-3">
             {% for category in categories %}
                 <div>
-                    <a href="#">
+                    <a href="{% url 'core:category' %}?category_name={{ category.name }}">
                         <div class="p-6 bg-white rounded-b-xl">
                             <h2 class="text-2xl">{{ category.name }}</h2>
                             <p class="text-gray-500">{{ category.items.count }} items</p>
@@ -40,9 +40,11 @@
                 </div>
             {% endfor %}
         </div>
+
+
     </div>
-    <script>
-        let message = "You can access all the functions only if you are authenticated.\nSo we recommend you to log in to the website.";
-        window.alert(message);
-    </script>
+<!--    <script>-->
+<!--        let message = "You can access all the functions only if you are authenticated.\nSo we recommend you to log in to the website.";-->
+<!--        window.alert(message);-->
+<!--    </script>-->
 {% endblock %}

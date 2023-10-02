@@ -30,3 +30,17 @@ def signup(request):
     return render(request, 'core/signup.html', {
         'form': form
     })
+
+
+def category(request):
+    category_name = request.GET.get('category_name')
+
+    if category_name:
+        items = Item.objects.filter(category__name=category_name)
+    else:
+        items = Item.objects.all()
+
+    return render(request, 'core/formal.html', {
+        'category_name': category_name,
+        'items': items
+    })
