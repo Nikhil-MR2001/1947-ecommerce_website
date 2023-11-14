@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment | 1947</title>
+</head>
+<body>
+  <h2>Make a Payment</h2>
+  <form action="" method="post">
+    {% csrf_token %}
+    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="{{ stripe_key }}"
+            data-amount="1000"  <!-- Amount in cents -->
+            data-name="Your Company"
+            data-description="Example Charge"
+            data-image="/your-image.png">
+    </script>
+  </form>
+</body>
+</html>

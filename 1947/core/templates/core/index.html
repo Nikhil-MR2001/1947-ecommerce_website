@@ -3,6 +3,8 @@
 {% block title %}Welcome{% endblock %}
 
 {% block content %}
+
+    {% comment %} <div><i class="fa fa-eye" aria-hidden="true"></i> | {{ visit_count }}</div> {% endcomment %}
     <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
         <h2 class="mb-12 text-2xl text-center">Newest Items</h2>
         {% comment %} <div class="grid grid-cols-3 gap-4"> {% endcomment %}
@@ -23,7 +25,9 @@
             </div>
         </div>
         
-</div> 
+    </div>
+
+
 
     <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
         <h2 class="mb-12 text-2xl text-center">Categories</h2>
@@ -40,9 +44,22 @@
                 </div>
             {% endfor %}
         </div>
-
-
     </div>
+    <div style="display: flex; flex: 1; margin-top: 20px; margin-bottom: 1px;">
+            <div class="counter-box  bg-teal-500" style="width: 50%; padding-top: 10px; padding-bottom:10px; padding-left: 30px;">
+                <i class="fa fa-eye"></i>
+                <span class="counter">{{ visit_count }} | Weekly Visiters</span>
+                
+            </div>
+            <div class="counter-box bg-gray-200" style="width: 50%; padding-top: 10px; padding-bottom: 10px;padding-left: 30px;">
+                <i class="fa fa-shopping-cart"></i>
+                <span class="counter"> {{ total_products }} | Total Products</span>
+                {% comment %} <p>Available Products</p> {% endcomment %}
+            </div>
+        
+    </div>
+    
+  
 <!--    <script>-->
 <!--        let message = "You can access all the functions only if you are authenticated.\nSo we recommend you to log in to the website.";-->
 <!--        window.alert(message);-->

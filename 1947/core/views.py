@@ -5,13 +5,24 @@ from item.models import Category, Item
 from .forms import SignupForm
 
 def index(request):
+
+    visit_count = request.COOKIES.get('visit_count', 0)   # to calculate visit count
+    visit_count = int(visit_count) + 1
+
+    total_products = Item.objects.count()   # to calculate total products
+
     items = Item.objects.filter(is_sold=False)[0:6]
     categories = Category.objects.all()
 
-    return render(request, 'core/index.html', {
+    response = render(request, 'core/index.html', {
         'categories': categories,
         'items': items,
+        'visit_count': visit_count,
+        'total_products' : total_products,
     })
+
+    response.set_cookie('visit_count', visit_count, max_age=86400)
+    return response
 
 def contact(request):
     return render(request, 'core/contact.html')
