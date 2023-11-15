@@ -26,13 +26,24 @@ def browse(request):
         'category_id': int(category_id)
     })
 
+def recent(request):
+    
+    #adding section sec2
+    # recent_visits = request.session.get('recent_visits', [])
+    # recently_viewed_items = Item.objects.filter(pk__in=recent_visits)  # this is for filtering the items(pk) that is stored in recent visits session
+    a = Item.objects.all()
+
+    return render(request,'recent_movies.html', { 'a' : a})
+
 def detail(request, pk):
+
     item = get_object_or_404(Item, pk=pk)
     related_items = Item.objects.filter(category=item.category, is_sold=False).exclude(pk=pk)[0:3]
 
     return render(request, 'item/detail.html', {
         'item': item,
-        'related_items': related_items
+        'related_items': related_items,
+       
     })
 
 @login_required

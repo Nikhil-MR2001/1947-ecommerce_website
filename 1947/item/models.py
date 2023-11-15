@@ -21,5 +21,8 @@ class Item(models.Model):
     created_by = models.ForeignKey(User, related_name='items', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     
+    is_discount = models.BooleanField(default=False)
+    sale_price = models.FloatField(default=0)
+    
     def __str__(self):
         return self.name
