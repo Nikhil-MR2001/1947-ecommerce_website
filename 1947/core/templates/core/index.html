@@ -32,6 +32,11 @@
           }          
     </style>
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 470d3706b624e1a597a2e19b9850d0b88d83d31d
 
     {% comment %} <div><i class="fa fa-eye" aria-hidden="true"></i> | {{ visit_count }}</div> {% endcomment %}
     <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
@@ -44,8 +49,12 @@
                     
                     
                     {% for item in items %}
+<<<<<<< HEAD
                     {% comment %} # adding discount {% endcomment %}
                         {% if item.is_discount %}      
+=======
+                        {% if item.is_discount %}      # adding discount
+>>>>>>> 470d3706b624e1a597a2e19b9850d0b88d83d31d
                         <a href="{% url 'item:detail' item.id %}" class="group" >
 
                             <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-xl bg-gray-400" style="height: 400px;">
